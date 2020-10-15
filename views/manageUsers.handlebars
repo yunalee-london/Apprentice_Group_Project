@@ -1,0 +1,27 @@
+<div class="contents">
+    <div class="topNav">
+        <a class ="navButton" href="/projectboards">Manage Projects</a>
+        <div class="header"> Users</div>
+
+    </div>
+    <main id="app"></main>
+    <div class="nav"></div>
+    <section class="userCard">
+        {{#each users}}
+        <div class="userCardDetails">
+            <div class="user-name">{{this.name}}</div>
+            <div class="user-image" style="background-image: url({{this.image}});"></div>
+        </div>
+        {{/each}}
+    </section>
+    <section class="userCard">
+        <div> New User</div>
+        <form action='/addUser' method="POST">
+            <label> Name</label>
+            <input name="name" type="text" placeholder="Name" required> <br>
+            <label> Image</label>
+            <input name="image" type="url" placeholder="Avatar"> <br>
+            <button style= "submitButton" type="submit"> Add </button>
+        </form>
+    </section>
+</div>
