@@ -5,10 +5,13 @@ const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-acce
 const app = express()
 const {ProjectBoard, List, User, Task, sequelize} = require('./models')
 
+const users = []
+
 const handlebars = expressHandlebars({
     handlebars: allowInsecurePrototypeAccess(Handlebars)
 })
-
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
 app.use(express.static('public'))
 app.engine('handlebars', handlebars)
 app.set('view engine', 'handlebars')
@@ -39,6 +42,16 @@ app.post('/projectboards/:id', async(req, res) => {
     const projectboard = await ProjectBoard.findByPk(req.params.id)
     await projectboard.createList(req.body)
     res.redirect(`/projectboards/${projectboard.id}`)
+})
+//addUser
+app.get('/users', (req, res) => {
+    res.send(users)
+})
+app.post('/users', async(req, res) => {
+    const user = await User.create(req.body)
+    console.log(user);
+    users.push(user)
+    res.send(users)
 })
 
 //User
