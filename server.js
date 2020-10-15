@@ -25,15 +25,15 @@ app.get('/projectboards', async(req, res) => {
     res.render('projectboards', {projectboards})
 })
 
-app.get('/projectboards/:id', async(req, res) => {
-    const projectboard = await ProjectBoard.findByPk(req.params.id)
-    const lists = await projectboard.getLists({
-        include : ['lists']
-    })
-    res.render('lists', {projectboard, lists})
-})
+// app.get('/projectboards/:id', async(req, res) => {
+//     const projectboard = await ProjectBoard.findByPk(req.params.id)
+//     const lists = await projectboard.getLists({
+//         include : ['lists']
+//     })
+//     res.render('lists', {projectboard, lists})
+// })
 
-//add
+//add Projectboard
 app.post('/projectboards', async(req, res) => {
     await ProjectBoard.create(req.body)
     res.redirect('/projectboards')
@@ -43,37 +43,60 @@ app.post('/projectboards/:id', async(req, res) => {
     await projectboard.createList(req.body)
     res.redirect(`/projectboards/${projectboard.id}`)
 })
-//addUser
-app.get('/users', (req, res) => {
-    res.send(users)
-})
-app.post('/users', async(req, res) => {
-    const user = await User.create(req.body)
-    console.log(user);
-    users.push(user)
-    res.send(users)
-})
 
-//User
+//managerUsers and addUser
 app.get('/manageUsers', async(req, res) => {
     const users = await User.findAll()
     res.render('manageUsers', {users})
 })
 
-// app.post('/manageUsers', async(req, res) => {
-//     await User.create(req.body)
-//     res.redirect('/manageUsers')
-// })
+app.post('/manageUsers', async(req, res) => {
+    await User.create(req.body)
+    res.redirect('manageUsers')
+})
 
-// app.get('/manageUsers/:id', async(req, res) => {
-//     const user = await User.findByPk(req.params.id)
-//     const tasks = await user.getTasks({
-//         include : ['tasks']
-//     })
-//     res.render('tasks', {user, tasks})
-// })
+app.get('/manageUsers/:id', async(req, res) => {
+    const user = await User.findByPk(req.params.id)
+    const tasks = await user.getTasks({
+        include : ['tasks']
+    })
+    res.render('tasks', {user, tasks})
+})
 
 app.listen(3000, async() => {
     await sequelize.sync()
     console.log("Web server is running on 3000")
+})
+
+// //addUser
+// app.get('/users', (req, res) => {
+//     res.send(users)
+// })
+// app.post('/users', async(req, res) => {
+//     const user = await User.create(req.body)
+//     console.log(user);
+//     users.push(user)
+//     res.send(users)
+// })
+
+app.get('/', (req, res) => {
+    res.render('addUser')
+})
+app.post('/addUser', async(req, res) => {
+    const user = await User.create(req.body)
+    console.log(user);
+})
+
+app.get('/', (req, res) => {
+    res.render('addUser')
+})
+app.post('/addUser', async(req, res) => {
+    const user = await User.create(req.body)
+    console.log(user);
+    res.render('addUser')
+})
+app.post('/addManageUser', async(req, res) => {
+    const user = await User.create(req.body)
+    console.log(user);
+    res.redirect('/manageUsers')
 })
