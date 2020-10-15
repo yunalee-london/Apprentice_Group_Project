@@ -1,25 +1,29 @@
 
 
-<div class="contents">
+<div class="body-contents">
     <div class="topNav">
         <a class ="navButton" href="/manageUsers">Manage Users</a>
-        <div class="header"> Project Boards</div>
     </div>
+    <div class="wrapper">
+    <div class="header"> Project Boards</div>
     <div class= "contents">
-    <section class="projectBoardCard">
         {{#each projectboards}}
-        <article class="image" style="background-image: url('{{this.image}}');">
-            <h2> {{this.name}} </h2>      
-        </article>
-        <div>
-            {{#each lists}}
+        <a href="/projectBoard/{{this.id}}">
+        <div class="projectBoardCard">
+            <article class="image" style="background-image: url('{{this.image}}');">
+                <h2> {{this.name}} </h2>      
+            </article>
             <div>
-                <div>{{this.description}}</div>
+                {{#each lists}}
+                <div>
+                    <div>{{this.name}}</div>
+                </div>
+                {{/each}}
             </div>
-            {{/each}}
-        </div>
+            </div>
+            </a>
         {{/each}}
-    </section>
+
     <section class="projectBoardCard">
         <h3> New Project Board</h3>
         <form action='/projectboards' method="POST">
@@ -31,6 +35,7 @@
         </form>
     </section>
     </div>
+</div>
 </div>
 
 

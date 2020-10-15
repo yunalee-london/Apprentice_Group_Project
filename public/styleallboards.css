@@ -3,7 +3,30 @@
     margin: 0;
     font-family: "Comic Sans MS", cursive, sans-serif;
     color: inherit;
+    overflow-x: hidden;
     text-decoration: none;
+}
+
+.body-contents {
+    /* font-size: large;
+    border: 2px;
+    border-width: thin;
+    border-color: rgb(0, 0, 0);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: row; */
+    min-height: 100vh;
+    background-color: rgb(190, 213, 255);
+}
+
+.projectBoard {
+    background-color: whitesmoke;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    margin: 40px;
+    padding: 20px;
 }
 
 .contents {
@@ -14,12 +37,13 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    min-height: 100vh;
+    flex-direction: row;
+    background-color: rgb(190, 213, 255);
   }
 
 .header {
-    align-self: center;
     font-size: 30px;
+    padding-left: 30px;
 
 }
 .projectBoardCard {
@@ -34,7 +58,6 @@
     flex-direction: column;
     width: 400px;
     height: 375px;
-    background-size: fit;
     transition: 0.5s;
 
 }
@@ -44,6 +67,27 @@
     border-radius: 30px;
     margin: 20px;
     opacity: 100%;
+}
+
+.listCard {
+    padding: 20px;
+    background-color: red ;
+    border-radius: 30px;
+    margin: 30px;
+    border: 4px;
+    border-color: rgb(0, 0, 0);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    height: 600px;
+    transition: 0.5s;
+}
+
+.projectContents {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }
 
 .userCard {
@@ -58,7 +102,6 @@
     flex-direction: column;
     width: 400px;
     height: 100px;
-    background-size: fit;
     transition: 0.5s;
 }
 
@@ -75,26 +118,31 @@
     justify-self: end;
     width: 50px;
     height: 50px;
-    background-size: fit;
+    background-size: cover;
 }
 
 .topNav {
     /* background-color: rgb(0, 0, 0,0.6); */
     overflow: hidden;
     display: flex;
-    justify-content: center;
     width: 4000px;
-    padding: 20px;
+    padding: 10px;
     max-height: 92px;
     /* position: sticky;
     top: 0;
     z-index: 4; */
 }
 
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
 .navButton {
     float: left;
-    color: white;
     text-align: middle;
+    justify-self: flex-start;
     padding: 28px 32px;
     margin: 4px;
     text-decoration: none;
@@ -102,9 +150,75 @@
     font-size: 24px;
 }
 
+.button{
+    display:inline-block;
+    padding:20px 80px;
+    border-radius: 50px;
+    text-decoration:none;
+    font-family:'Roboto',sans-serif;
+    font-weight:300;
+    color:#FFFFFF;
+    text-align:center;
+    transition: all 0.2s;
+    font-size: 50px;
+    background-color: dodgerblue;
+    outline:none;
+    }
 
 
+.button:hover{
+    color:#000000;
+    background-color:#FFFFFF;
+}
 
+.profilePicture{
+    background-size: cover;
+    border: groove black;
+    height: 30%;
+    width: 30%;
+    margin: 30px;
+}
+
+.userPage{
+    height: 95vh;
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(190, 213, 255);
+
+}
+
+.userTitle{
+    text-align: center;
+    width: 27%;
+    padding-bottom: 20px;
+}
+.userProfileInfo{
+    width: 50%;
+}
+.userCreated{
+    padding-bottom: 20px;
+    padding-left: 30px;
+}
+.userUpdated{
+    padding-bottom: 20px;
+    padding-left: 30px;
+}
+.taskList{
+    background-color: whitesmoke;
+    border-radius: 30px;
+    transition: 0.5s;
+    padding: 30px;
+    margin: 14px;
+    width: 35%;
+}
+.userTaskList{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+.taskListHeader{
+    width: 100%;
+}
 
 /* body {
     display: flex;
