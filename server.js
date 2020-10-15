@@ -64,6 +64,14 @@ app.get('/manageUsers', async(req, res) => {
     res.render('manageUsers', {users})
 })
 
+app.get('/manageUsers/:id', async (req, res) => {
+    const user = await User.findByPk(req.params.id)
+    // const tasks = await user.getTasks({
+    //     include: [{model: Task, as: 'tasks'}],
+    //     nest: true
+    // })
+    res.render('userPage', {user})
+})
 // app.post('/manageUsers', async(req, res) => {
 //     await User.create(req.body)
 //     res.redirect('/manageUsers')

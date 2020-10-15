@@ -1,0 +1,28 @@
+<body class="userPage">
+    <section class="userProfileInfo">
+        <div class="profilePicture" style="background-image: url("{{user.image}})";"> </div>
+        <div class="userTitle"> User: {{user.name}}</div>
+        <div class="userCreated">Created: {{user.createdAt}}</div>
+        <div class="userUpdated">Last Updated: {{user.updatedAt}}</div>
+    </section>
+    <section class ="userTaskList">
+        <h3 class="taskListHeader"> Task List </h3>
+        {{!-- {{#each task}} --}}
+        <div class ="taskList">
+            task: {{user.task}}
+        </div> 
+        <div class ="taskList">
+            task: {{user.task}}
+        </div>
+        <div class ="taskList">
+            task: {{user.task}}
+        </div>
+        <div class ="taskList">
+            task: {{user.task}}
+        </div>
+        <div class ="taskList">
+            task: {{user.task}}
+        </div>
+        {{!-- {{/each}} --}}
+    </section>
+</body>

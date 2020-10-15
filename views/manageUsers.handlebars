@@ -7,7 +7,7 @@
     <div class="contents">
     
         {{#each users}}
-        <section class="userCard">
+        <section class="userCard"> <a href="/manageUsers/{{this.id}}">
         <div class="userCardDetails">
             <div class="user-name">{{this.name}}</div>
             <div class="user-image" style="background-image: url({{this.image}});"></div>

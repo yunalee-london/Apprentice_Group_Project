@@ -32,6 +32,7 @@ ProjectBoard.hasMany(List, {as:"lists"})
 List.belongsTo(ProjectBoard)
 List.hasMany(Task, {as: 'tasks'})
 Task.belongsTo(List)
+User.hasMany(Task, {as: 'tasks'})
 
 
 
