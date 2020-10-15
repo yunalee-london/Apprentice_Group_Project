@@ -44,16 +44,20 @@ app.post('/projectboards/:id', async(req, res) => {
     res.redirect(`/projectboards/${projectboard.id}`)
 })
 //addUser
-app.get('/users', (req, res) => {
-    res.send(users)
+app.get('/', (req, res) => {
+    res.render('addUser')
 })
-app.post('/users', async(req, res) => {
+app.post('/addUser', async(req, res) => {
     const user = await User.create(req.body)
     console.log(user);
-    users.push(user)
-    res.send(users)
+    res.render('addUser')
 })
 
+app.post('/addManageUser', async(req, res) => {
+    const user = await User.create(req.body)
+    console.log(user);
+    res.redirect('/manageUsers')
+})
 //User
 app.get('/manageUsers', async(req, res) => {
     const users = await User.findAll()
