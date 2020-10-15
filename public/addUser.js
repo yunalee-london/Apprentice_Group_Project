@@ -1,7 +1,6 @@
-var idNum = 0
 
 const state = {
-    tasks: []
+    users: []
 }
 const view = (state) =>
 `
@@ -26,28 +25,27 @@ const view = (state) =>
 </body>
 `
 const update = {
+    getUserFunction: (state) => {
+        const result = fetch("/User")
+    },
     add: (state, form) => {
         const data = new FormData(form)
-        const task = {
-            id: (idNum + 1),
-            text: data.get('userName'),
-            status: 0
-        }
+        // const user = new User({name: data.get('userName'), image:'url'})
+        // console.log(user);
         const postRequest = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(task)
+            body: JSON.stringify(user)
         }
-        fetch('/tasks', postRequest).then(() => app.run('getTasks'))
-        idNum = (idNum + 1)
+        fetch('/users', postRequest).then(() => app.run('getUsers'))
         return state
     },
-    getTasks: async (state) => {
-        state.tasks = await fetch('/tasks').then(res => res.json())
+    getUsers: async (state) => {
+        state.users = await fetch('/users').then(res => res.json())
         return state
     }
 }
 app.start('app', state, view, update)
-app.run('getTasks')
+app.run('getUsers')
