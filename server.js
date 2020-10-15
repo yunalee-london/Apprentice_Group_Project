@@ -5,7 +5,6 @@ const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-acce
 const app = express()
 const {ProjectBoard, List, User, Task, sequelize} = require('./models')
 
-const users = []
 
 const handlebars = expressHandlebars({
     handlebars: allowInsecurePrototypeAccess(Handlebars)
@@ -36,6 +35,7 @@ app.get('/projectboards/:id', async(req, res) => {
 //add
 app.post('/projectboards', async(req, res) => {
     await ProjectBoard.create(req.body)
+    
     res.redirect('/projectboards')
 })
 app.post('/projectboards/:id', async(req, res) => {
@@ -63,7 +63,6 @@ app.get('/manageUsers', async(req, res) => {
     const users = await User.findAll()
     res.render('manageUsers', {users})
 })
-
 app.get('/manageUsers/:id', async (req, res) => {
     const user = await User.findByPk(req.params.id)
     // const tasks = await user.getTasks({
@@ -72,6 +71,21 @@ app.get('/manageUsers/:id', async (req, res) => {
     // })
     res.render('userPage', {user})
 })
+
+app.get('/projectBoard/:id', async (req, res) => {
+    const projectBoard = await ProjectBoard.findByPk(req.params.id)
+    const lists = await List.findAll({where: {ProjectBoardId: projectBoard.id}})
+    // const tasks = await Task.findAll({where: {ListId: lists.id}})
+    res.render('project', {projectBoard, lists})
+})
+
+app.get('/fetchTaskList', async (req, res) => {
+    // // const projectBoard = await ProjectBoard.findByPk(req.params.id)
+    // // const lists = await List.findAll({where: {ProjectBoardId: projectBoard.id}})
+    // const array = [projectBoard, lists]
+    // res.send(array)
+})
+
 // app.post('/manageUsers', async(req, res) => {
 //     await User.create(req.body)
 //     res.redirect('/manageUsers')
