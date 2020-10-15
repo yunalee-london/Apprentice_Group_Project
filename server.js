@@ -43,7 +43,7 @@ app.post('/projectboards/:id', async(req, res) => {
     await projectboard.createList(req.body)
     res.redirect(`/projectboards/${projectboard.id}`)
 })
-//User
+//addUser
 app.get('/users', (req, res) => {
     res.send(users)
 })

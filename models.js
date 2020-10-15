@@ -12,10 +12,7 @@ class Task extends Model {}
 User.init({
     name: DataTypes.STRING,
     image: DataTypes.STRING,
-<<<<<<< HEAD
     // tasks: DataTypes.ARRAY(DataTypes.STRING),
-=======
->>>>>>> refs/remotes/origin/main
 }, {sequelize})
 
 ProjectBoard.init({
