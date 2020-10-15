@@ -43,4 +43,7 @@ app.post('/projectboards/:id', async(req, res) => {
 
 
 
-app.listen(3001, () => console.log('web server running on port 3001'))
+app.listen(3000, async() => {
+    await sequelize.sync()
+    console.log("Web server is running")
+})
