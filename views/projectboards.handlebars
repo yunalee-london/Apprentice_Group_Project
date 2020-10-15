@@ -8,6 +8,7 @@
     <div class="header"> Project Boards</div>
     <div class= "contents">
         {{#each projectboards}}
+        <a href="/projectBoard/{{this.id}}">
         <div class="projectBoardCard">
             <article class="image" style="background-image: url('{{this.image}}');">
                 <h2> {{this.name}} </h2>      
@@ -20,6 +21,7 @@
                 {{/each}}
             </div>
             </div>
+            </a>
         {{/each}}
 
     <section class="projectBoardCard">
