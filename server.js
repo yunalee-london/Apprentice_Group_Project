@@ -3,7 +3,7 @@ const Handlebars = require('handlebars')
 const expressHandlebars = require('express-handlebars')
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 const app = express()
-const {ProjectBoard, List, User, sequelize} = require('./models')
+const {ProjectBoard, List, User, Task, sequelize} = require('./models')
 
 const handlebars = expressHandlebars({
     handlebars: allowInsecurePrototypeAccess(Handlebars)
@@ -41,9 +41,26 @@ app.post('/projectboards/:id', async(req, res) => {
     res.redirect(`/projectboards/${projectboard.id}`)
 })
 
+//User
+app.get('/manageUsers', async(req, res) => {
+    const users = await User.findAll()
+    res.render('manageUsers', {users})
+})
 
+// app.post('/manageUsers', async(req, res) => {
+//     await User.create(req.body)
+//     res.redirect('/manageUsers')
+// })
+
+// app.get('/manageUsers/:id', async(req, res) => {
+//     const user = await User.findByPk(req.params.id)
+//     const tasks = await user.getTasks({
+//         include : ['tasks']
+//     })
+//     res.render('tasks', {user, tasks})
+// })
 
 app.listen(3000, async() => {
     await sequelize.sync()
-    console.log("Web server is running")
+    console.log("Web server is running on 3000")
 })
