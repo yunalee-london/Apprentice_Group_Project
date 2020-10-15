@@ -63,6 +63,28 @@ app.get('/manageUsers', async(req, res) => {
     const users = await User.findAll()
     res.render('manageUsers', {users})
 })
+app.get('/manageUsers/:id', async (req, res) => {
+    const user = await User.findByPk(req.params.id)
+    // const tasks = await user.getTasks({
+    //     include: [{model: Task, as: 'tasks'}],
+    //     nest: true
+    // })
+    res.render('userPage', {user})
+})
+
+app.get('/projectBoard/:id', async (req, res) => {
+    const projectBoard = await ProjectBoard.findByPk(req.params.id)
+    const lists = await List.findAll({where: {ProjectBoardId: projectBoard.id}})
+    // const tasks = await Task.findAll({where: {ListId: lists.id}})
+    res.render('project', {projectBoard, lists})
+})
+
+app.get('/fetchTaskList', async (req, res) => {
+    // // const projectBoard = await ProjectBoard.findByPk(req.params.id)
+    // // const lists = await List.findAll({where: {ProjectBoardId: projectBoard.id}})
+    // const array = [projectBoard, lists]
+    // res.send(array)
+})
 
 app.get('/projectBoard/:id', async (req, res) => {
     const projectBoard = await ProjectBoard.findByPk(req.params.id)

@@ -118,7 +118,7 @@
     justify-self: end;
     width: 50px;
     height: 50px;
-    background-size: fit;
+    background-size: cover;
 }
 
 .topNav {
@@ -171,9 +171,54 @@
     background-color:#FFFFFF;
 }
 
+.profilePicture{
+    background-size: cover;
+    border: groove black;
+    height: 30%;
+    width: 30%;
+    margin: 30px;
+}
 
+.userPage{
+    height: 95vh;
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(190, 213, 255);
 
+}
 
+.userTitle{
+    text-align: center;
+    width: 27%;
+    padding-bottom: 20px;
+}
+.userProfileInfo{
+    width: 50%;
+}
+.userCreated{
+    padding-bottom: 20px;
+    padding-left: 30px;
+}
+.userUpdated{
+    padding-bottom: 20px;
+    padding-left: 30px;
+}
+.taskList{
+    background-color: whitesmoke;
+    border-radius: 30px;
+    transition: 0.5s;
+    padding: 30px;
+    margin: 14px;
+    width: 35%;
+}
+.userTaskList{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+.taskListHeader{
+    width: 100%;
+}
 
 /* body {
     display: flex;
