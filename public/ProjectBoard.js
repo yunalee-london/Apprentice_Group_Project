@@ -7,5 +7,4 @@ const view = {
 }
 
 const update = {
-
 }
