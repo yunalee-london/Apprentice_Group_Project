@@ -12,7 +12,6 @@ class Task extends Model {}
 User.init({
     name: DataTypes.STRING,
     image: DataTypes.STRING,
-    tasks: DataTypes.ARRAY(DataTypes.STRING),
 }, {sequelize})
 
 ProjectBoard.init({
@@ -20,7 +19,7 @@ ProjectBoard.init({
 }, {sequelize})
 
 List.init({
-    description: DataTypes.STRING,
+    name: DataTypes.STRING,
 }, {sequelize})
 
 Task.init({
