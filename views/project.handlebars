@@ -7,33 +7,25 @@
         <div class="header">{{projectBoard.name}}</div>
         <div class= "projectContents">
             {{#each lists}}
-            <div class ="listCard">
-                <div class="header">{{this.name}}</div>
-                <div class="taskContainer" id="container">
-                    {{#each this.tasks}}
-                        <div class="taskCard">
-                            <div class="taskHeader"></div>
+                <div class ="listCard">
+                    <div class="header">{{this.name}}</div>
+                    <div class="taskContainer" id="container">
+                        {{#each this.tasks}}
+                            <div class="taskCard">
+                                <div class="taskHeader">{{this.description}}</div>
+                            </div>
+                        {{/each}}
+                        <div id="addTask" class="taskCard">
+                            <script type="text/javascript">
+                                addTask('{{this.name}}', 'To Do', {{this.id}});
+                            </script>
                         </div>
-                        {{!-- {{#if (this.tasks.name == "To Do")}}
-                        <div class="taskCard">
-                            <form action="/addTask" method="POST">
-
-                            </form>
-                        </div>
-                        {{/if}} --}}
-                    {{/each}}
+                    </div>
                 </div>
-            </div>
             {{/each}}
         </div>
     </div>
 </div>
 
 
-<form action='/projectboards' method="POST">
-    <label> Name : </label>
-    <input name="name" type="text" placeholder="Project Board Title" required> <br>
-    <label> Image : </label>
-    <input name="image" type="url" placeholder="Project Board Title"> <br>
-    <button type="submit"> Add </button>
-</form>
+

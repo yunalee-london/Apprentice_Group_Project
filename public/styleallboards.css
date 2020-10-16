@@ -71,7 +71,7 @@
 
 .listCard {
     padding: 20px;
-    background-color: red ;
+    background-color: rgb(255, 255, 255) ;
     border-radius: 30px;
     margin: 30px;
     border: 4px;
@@ -211,6 +211,14 @@
     margin: 14px;
     width: 35%;
 }
+
+.taskcard {
+    z-index: 6;
+    background-color: rgb(230, 230, 230);
+    padding: 10px;
+    border-radius: 20px;
+}
+
 .userTaskList{
     display: flex;
     flex-direction: column;
