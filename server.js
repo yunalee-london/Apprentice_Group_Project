@@ -3,7 +3,7 @@ const Handlebars = require('handlebars')
 const expressHandlebars = require('express-handlebars')
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 const app = express()
-const {ProjectBoard, List, User, Task, sequelize} = require('./models')
+const {ProjectBoard, User, Task, sequelize} = require('./models')
 
 
 const handlebars = expressHandlebars({
@@ -18,7 +18,7 @@ app.set('view engine', 'handlebars')
 app.get('/projectboards', async(req, res) => {
     const projectboards = await ProjectBoard.findAll({
         include : [
-            {model: List , as: 'lists'}
+            {model: Task , as: 'tasks'}
         ]
     })
     res.render('projectboards', {projectboards})
@@ -26,10 +26,10 @@ app.get('/projectboards', async(req, res) => {
 
 app.get('/projectboards/:id', async(req, res) => {
     const projectboard = await ProjectBoard.findByPk(req.params.id)
-    const lists = await projectboard.getLists({
-        include : ['lists']
+    const tasks = await projectboard.getTasks({
+        include : ['tasks']
     })
-    res.render('lists', {projectboard, lists})
+    res.render('tasks', {projectboard, tasks})
 })
 
 //add
@@ -38,11 +38,11 @@ app.post('/projectboards', async(req, res) => {
     
     res.redirect('/projectboards')
 })
-app.post('/projectboards/:id', async(req, res) => {
-    const projectboard = await ProjectBoard.findByPk(req.params.id)
-    await projectboard.createList(req.body)
-    res.redirect(`/projectboards/${projectboard.id}`)
-})
+// app.post('/projectboards/:id', async(req, res) => {
+//     const projectboard = await ProjectBoard.findByPk(req.params.id)
+//     await projectboard.create(req.body)
+//     res.redirect(`/projectboards/${projectboard.id}`)
+// })
 //addUser
 app.get('/', (req, res) => {
     res.render('addUser')
@@ -74,29 +74,29 @@ app.get('/manageUsers/:id', async (req, res) => {
 
 app.get('/projectBoard/:id', async (req, res) => {
     const projectBoard = await ProjectBoard.findByPk(req.params.id)
-    const lists = await List.findAll({where: {ProjectBoardId: projectBoard.id}})
+    const tasks = await Task.findAll({where: {ProjectBoardId: projectBoard.id}})
     // const tasks = await Task.findAll({where: {ListId: lists.id}})
-    res.render('project', {projectBoard, lists})
+    res.render('project', {projectBoard, tasks})
 })
 
 app.get('/fetchTaskList', async (req, res) => {
     // // const projectBoard = await ProjectBoard.findByPk(req.params.id)
-    // // const lists = await List.findAll({where: {ProjectBoardId: projectBoard.id}})
-    // const array = [projectBoard, lists]
+    // // const tasks = await Task.findAll({where: {ProjectBoardId: projectBoard.id}})
+    // const array = [projectBoard, tasks]
     // res.send(array)
 })
 
 app.get('/projectBoard/:id', async (req, res) => {
     const projectBoard = await ProjectBoard.findByPk(req.params.id)
-    const lists = await List.findAll({where: {ProjectBoardId: projectBoard.id}})
-    // const tasks = await Task.findAll({where: {ListId: lists.id}})
-    res.render('project', {projectBoard, lists})
+    const tasks = await Task.findAll({where: {ProjectBoardId: projectBoard.id}})
+    // const tasks = await Task.findAll({where: {ListId: tasks.id}})
+    res.render('project', {projectBoard, tasks})
 })
 
 app.get('/fetchTaskList', async (req, res) => {
     // // const projectBoard = await ProjectBoard.findByPk(req.params.id)
-    // // const lists = await List.findAll({where: {ProjectBoardId: projectBoard.id}})
-    // const array = [projectBoard, lists]
+    // // const tasks = await Task.findAll({where: {ProjectBoardId: projectBoard.id}})
+    // const array = [projectBoard, tasks]
     // res.send(array)
 })
 
@@ -114,11 +114,11 @@ app.get('/fetchTaskList', async (req, res) => {
 // })
 
 app.post('/addTask/:id', async (req, res) => {
-    const list = await List.findByPk(req.params.id)
-    const projectBoard =  await ProjectBoard.findByPk(list.ProjectBoardId)
-    await list.createTask(req.body)
-    const lists = await List.findAll({where: {ProjectBoardId: projectBoard.id}})
-    res.render('project', {projectBoard, lists, })
+    const task = await Task.findByPk(req.params.id)
+    const projectBoard =  await ProjectBoard.findByPk(task.ProjectBoardId)
+    await task.createTask(req.body)
+    const tasks = await Task.findAll({where: {ProjectBoardId: projectBoard.id}})
+    res.render('project', {projectBoard, tasks})
 })
 
 app.listen(3000, async() => {
