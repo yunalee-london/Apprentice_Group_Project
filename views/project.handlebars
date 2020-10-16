@@ -7,10 +7,10 @@
         <div class="header">{{projectBoard.name}}</div>
         <div class= "projectContents">
                 <div class ="listCard">
-                    <div class="header">To Do</div>
+                    <div class="listHeader">To Do</div>
                     <div class="taskContainer" id="container">
                         {{#each this.tasks}}
-                            <div class="taskCard">
+                            <div class="taskCard" draggable="true">
                                 <div class="taskHeader">{{this.name}}</div>
                             </div>
                         {{/each}}
@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div class ="listCard">
-                    <div class="header">In Progress</div>
+                    <div class="listHeader">In Progress</div>
                     <div class="taskContainer" id="container">
                             <div class="taskCard">
                                 <div class="taskHeader">{{this.name}}</div>
@@ -34,7 +34,7 @@
                     </div>
                 </div>
                 <div class ="listCard">
-                    <div class="header">Done</div>
+                    <div class="listHeader">Done</div>
                     <div class="taskContainer" id="container">
                             <div class="taskCard">
                                 <div class="taskHeader">{{this.name}}</div>
