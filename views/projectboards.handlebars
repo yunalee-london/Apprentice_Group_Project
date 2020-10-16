@@ -10,7 +10,6 @@
         {{#each projectboards}}
         <a href="/projectBoard/{{this.id}}">
         <div class="projectBoardCard">
-            <article class="image" style="background-image: url('{{this.image}}');">
                 <h2> {{this.name}} </h2>      
             </article>
             <div>
@@ -29,9 +28,6 @@
         <form action='/projectboards' method="POST">
         <label> Name : </label>
         <input name="name" type="text" placeholder="Project Board Title" required> <br>
-        <label> Image : </label>
-        <input name="image" type="url" placeholder="Project Board Title"> <br>
-        <button type="submit"> Add </button>
         </form>
     </section>
     </div>
