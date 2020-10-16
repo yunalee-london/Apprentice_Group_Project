@@ -7,12 +7,14 @@
     <div class="contents">
     
         {{#each users}}
-        <section class="userCard"> <a href="/manageUsers/{{this.id}}">
+        <a href="/manageUsers/{{this.id}}">
+        <section class="userCard">
         <div class="userCardDetails">
             <div class="user-name">{{this.name}}</div>
             <div class="user-image" style="background-image: url({{this.image}});"></div>
         </div>
         </section>
+        </a>
         {{/each}}
     <section class="userCard">
         <div> New User</div>
