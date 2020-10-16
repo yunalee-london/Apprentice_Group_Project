@@ -113,6 +113,14 @@ app.get('/fetchTaskList', async (req, res) => {
 //     res.render('tasks', {user, tasks})
 // })
 
+app.post('/addTask/:id', async (req, res) => {
+    const list = await List.findByPk(req.params.id)
+    const projectBoard =  await ProjectBoard.findByPk(list.ProjectBoardId)
+    await list.createTask(req.body)
+    const lists = await List.findAll({where: {ProjectBoardId: projectBoard.id}})
+    res.render('project', {projectBoard, lists, })
+})
+
 app.listen(3000, async() => {
     await sequelize.sync()
     console.log("Web server is running on 3000")

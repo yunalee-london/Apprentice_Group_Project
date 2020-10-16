@@ -3,6 +3,43 @@
     <head>
         <script src="https://unpkg.com/apprun/dist/apprun-html.js"></script>
         <link rel="stylesheet" href="/styleallboards.css"/>
+        <script type="text/javascript">
+
+    function addTask(a, b, id) {
+        if (a == b) {
+            let container = document.getElementById("addTask")
+
+            let div = document.createElement("div")
+            div.className = "taskCard"
+
+            let form = document.createElement("form")
+            form.action = ("/addTask/" + id)
+            form.method = "POST"
+
+            let label = document.createElement("label")
+            let name = document.createTextNode("Name:")
+            label.appendChild(name)
+
+            let input = document.createElement("input")
+            input.name = "description"
+            input.type = "text"
+            input.placeholder = "Task name"
+            
+            let button = document.createElement("button")
+            let name2 = document.createTextNode("Add")
+            button.className = "submitButton"
+            button.appendChild(name2)
+
+            form.appendChild(label)
+            form.appendChild(input)
+            form.appendChild(button)
+            div.appendChild(form)
+
+            container.appendChild(div)
+        }
+
+}
+</script>
     </head>
     <body>
         {{{body}}}
