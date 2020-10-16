@@ -114,9 +114,9 @@ app.get('/fetchTaskList', async (req, res) => {
 // })
 
 app.post('/addTask/:id', async (req, res) => {
-    const task = await Task.findByPk(req.params.id)
-    const projectBoard =  await ProjectBoard.findByPk(task.ProjectBoardId)
-    await task.createTask(req.body)
+    const projectBoard = await ProjectBoard.findByPk(req.params.id)
+    const task = await Task.createTask(req.body)
+    await projectBoard.addTask(task)
     const tasks = await Task.findAll({where: {ProjectBoardId: projectBoard.id}})
     res.render('project', {projectBoard, tasks})
 })

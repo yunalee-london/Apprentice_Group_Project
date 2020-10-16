@@ -6,23 +6,44 @@
     <div class="projectBoard">
         <div class="header">{{projectBoard.name}}</div>
         <div class= "projectContents">
-            {{#each lists}}
                 <div class ="listCard">
-                    <div class="header">{{this.name}}</div>
+                    <div class="header">To Do</div>
                     <div class="taskContainer" id="container">
                         {{#each this.tasks}}
                             <div class="taskCard">
-                                <div class="taskHeader">{{this.description}}</div>
+                                <div class="taskHeader">{{this.name}}</div>
                             </div>
                         {{/each}}
                         <div id="addTask" class="taskCard">
-                            <script type="text/javascript">
-                                addTask('{{this.name}}', 'To Do', {{this.id}});
-                            </script>
+                            <form action='/addTask/{{projectBoard.id}}' method="POST">
+                                <label> Name : </label>
+                                <input name="name" type="text" placeholder="Project Board Title" required> <br>
+                            </form>
                         </div>
                     </div>
                 </div>
-            {{/each}}
+                <div class ="listCard">
+                    <div class="header">In Progress</div>
+                    <div class="taskContainer" id="container">
+                            <div class="taskCard">
+                                <div class="taskHeader">{{this.name}}</div>
+                            </div>
+                        <div id="addTask" class="taskCard">
+
+                        </div>
+                    </div>
+                </div>
+                <div class ="listCard">
+                    <div class="header">Done</div>
+                    <div class="taskContainer" id="container">
+                            <div class="taskCard">
+                                <div class="taskHeader">{{this.name}}</div>
+                            </div>
+                        <div id="addTask" class="taskCard">
+
+                        </div>
+                    </div>
+                </div>
         </div>
     </div>
 </div>
