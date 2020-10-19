@@ -48,8 +48,8 @@ app.get('/', (req, res) => {
     res.render('addUser')
 })
 app.post('/addUser', async(req, res) => {
+    console.log(req.body + "------------------------------------------")
     const user = await User.create(req.body)
-    console.log(user);
     res.render('addUser')
 })
 
@@ -70,6 +70,12 @@ app.get('/manageUsers/:id', async (req, res) => {
     //     nest: true
     // })
     res.render('userPage', {user})
+})
+
+app.post('/taskUpdateInProgress', async (req, res) => {
+    const task = Task.findByPk(req.body.id)
+    await task.update({status: "inProgress"})
+    res.send()
 })
 
 app.get('/projectBoard/:id', async (req, res) => {
@@ -121,10 +127,11 @@ app.get('/fetchTaskList', async (req, res) => {
 //     res.render('project', {projectBoard, tasks})
 // })
 
-app.post('/addTask', async (req, res) => {
-    console.log(req.body)
-    console.group("asdasdasdadsdsasdsad")
-    Task.create(req.body)
+app.post('/addTask/:id', async (req, res) => {
+    const projectBoard = await ProjectBoard.findByPk(req.params.id)
+    const task = await Task.create(req.body)
+    await projectBoard.addTask(task)
+    // res.redirect(`/projectBoard/${req.body.id}`)
     res.send()
 })
 
