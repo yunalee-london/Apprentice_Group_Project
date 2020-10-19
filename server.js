@@ -72,6 +72,12 @@ app.get('/manageUsers/:id', async (req, res) => {
     res.render('userPage', {user})
 })
 
+app.post('/taskUpdateInProgress', async (req, res) => {
+    const task = Task.findByPk(req.body.id)
+    await task.update({status: "inProgress"})
+    res.send()
+})
+
 app.get('/projectBoard/:id', async (req, res) => {
     const projectBoard = await ProjectBoard.findByPk(req.params.id)
     const tasks = await Task.findAll({where: {ProjectBoardId: projectBoard.id}})

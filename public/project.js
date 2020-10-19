@@ -23,7 +23,7 @@ const view = (state) => `
                         <div class="listHeader">To Do</div>
                         <div class="taskContainer" id="container">
                             ${state.tasksAvailable.map(task => `
-                            <div class="taskCard" draggable="true">
+                            <div id="${task.id}" class="taskCard" draggable="true" ondragstart="app.run('onDrag', event)" ondragover="event.preventDefault()">
                             <div class="taskHeader">${task.name}</div>
                             </div>
                             `).join("")}
@@ -39,7 +39,7 @@ const view = (state) => `
                     </div>
                     <div class ="listCard">
                         <div class="listHeader">In Progress</div>
-                        <div class="taskContainer" id="container">
+                        <div class="taskContainer" id="container" ondragover="event.preventDefault()" ondrop="app.run('onDropInProgress', event)">
                         ${state.tasksInProgress.map(task => `
                             <div class="taskCard" draggable="true">
                             <div class="taskHeader">${task.name}</div>
@@ -75,6 +75,34 @@ const update = {
         }
         state.tasksAvailable.push(task)
         fetch(`/addTask/${state.projectBoard.id}`, postRequest).then(() => app.run('getTasks'))
+        return state
+    },
+
+
+
+    onDrag: (state, event) => {
+        event.dataTransfer.setData('text', event.target.id)
+        return state
+    },
+
+    onDropInProgress: (state, event) => {
+        console.log("wiuehagierwuhfiowauehaiowuhfaeiouwhfEIOUWh")
+        event.preventDefault()
+        const id = event.dataTransfer.getData('text')
+        const index = state.tasksAvailable.findIndex(task => task.id == id)
+        const task = state.tasksAvailable[index]
+        app.run('changeStatus',task)
+        state.tasksInProgress.push(task)
+        state.tasksAvailable.splice(index, 1)
+        const postRequest = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(task)
+        }
+        fetch('/taskUpdateInProgress', postRequest).then(() => app.run('getTasks'))
+        // app.run('taskComplete', task)
         return state
     },
 
