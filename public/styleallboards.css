@@ -273,6 +273,9 @@
     background-color: darkorange;
     outline: none;
 }
+.form-input{
+    padding: 0
+}
 /* body {
     display: flex;
     justify-content: center;
