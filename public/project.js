@@ -23,13 +23,13 @@ const view = (state) => `
             <div class= "projectContents">
                     <div class ="listCard">
                         <div class="listHeader">To Do</div>
-                        <div class="taskContainer" id="container">
+                        <div class="taskContainer" id="container" >
                             ${state.tasksAvailable.map(task => `
-                            <div id="${task.id}" class="taskCard" draggable="true" ondragstart="app.run('onDrag', event)" ondragover="event.preventDefault()">
-                            <div class="taskHeader">${task.name}<div ondragover="event.preventDefault()" ondrop="app.run('onDropUser', event)"></div></div>
+                            <div id="${task.id}" class="taskCard" draggable="true" ondrop="app.run('onDropUser', event)" ondragstart="app.run('onDrag', event)" ondragover="event.preventDefault()">
+                            <div class="taskHeader">${task.name}<div ondragover="event.preventDefault()" ondrop="app.run('onDropUser', event)"><div class= "userLabel"></div></div></div>
                             </div>
                             `).join("")}
-                            <div class="taskCard">
+                            <div class="taskCard" ondrop="app.run('onDropUser', event)">
                                 <form onsubmit="app.run('add', this);return false;">
                                     <label> Name : </label>
                                     <input name="name" type="text" placeholder="Task Description" required> <br>
@@ -126,7 +126,14 @@ const update = {
     onDropUser:(state, event) =>{
         const id = event.dataTransfer.getData('text')
         const index = state.users.findIndex(user => user.id == id)
-        const user = state.user[index]
+        const users = state.users[index]
+        const postRequest = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(users)
+        }
         
         fetch('/assignUserTask', postRequest).then(() => app.run('getTasks'))
         return state

@@ -106,8 +106,11 @@ app.get('/projectBoard/:id', async (req, res) => {
     res.render('project', {projectBoard, tasks})
 })
 
-app.post('/assignUserTask/:id', async (req, res) => {
-    
+app.post('/assignUserTask', async (req, res) => {
+    const user = await User.findByPk(req.body.id)
+    const task = await Task.findByPk(req.body.id)
+    await task.update({UserId: user.id})
+    res.send()
 })
 
 app.get('/fetchTaskList', async (req, res) => {
