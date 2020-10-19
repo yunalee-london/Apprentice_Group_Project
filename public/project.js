@@ -3,6 +3,13 @@ const available = state.tasks.filter(task => task.status == 'available')
 const inProgress = state.tasks.filter(task => task.status == 'inProgress')
 const complete = state.tasks.filter(task => task.status == 'complete')
 
+class Task  {
+    constructor(data) {
+        this.name = data.get('name')
+        this.status = 'available'
+    }
+}
+
 const view = (state) => `
         <div class="body-contents">
         <div class="topNav">
@@ -24,6 +31,7 @@ const view = (state) => `
                                     <label> Name : </label>
                                     <input name="name" type="text" placeholder="Task Description" required> <br>
                                     <input name="status" value="available" type="hidden">
+                                    <button class='submit2'>submit</button>
                                 </form>
                             </div>
                         </div>
@@ -55,16 +63,23 @@ const view = (state) => `
 
 const update = {
     add: async (state, form) => {
-        const data = new FromData(form)
-        console.log("adanajnoauwdnikauwbdajwikuw")
-        fetch('/addTask', data).then(() => app.run('getTasks'))
+        const data = new FormData(form)
+        const task = new Task(data)
+        const postRequest = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(task)
+        }
+        state.tasks.push(task)
+        fetch(`/addTask/${state.projectBoard.id}`, postRequest).then(() => app.run('getTasks'))
         return state
     },
 
     getTasks: async (state) => {
         const result = await fetch(`/fetchTaskList/${state.projectBoard.id}`).then(res => res.json())
-        state.projectBoard = result[0]
-        state.lists = result[1]
+
         return state
     }
 }
