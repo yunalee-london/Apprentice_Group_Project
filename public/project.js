@@ -1,7 +1,7 @@
 
-const available = state.tasks.filter(task => task.status == 'available')
-const inProgress = state.tasks.filter(task => task.status == 'inProgress')
-const complete = state.tasks.filter(task => task.status == 'complete')
+state.tasksAvailable = state.tasks.filter(task => task.status == 'available')
+state.tasksInProgress = state.tasks.filter(task => task.status == 'inProgress')
+state.tasksComplete = state.tasks.filter(task => task.status == 'complete')
 
 class Task  {
     constructor(data) {
@@ -9,6 +9,7 @@ class Task  {
         this.status = 'available'
     }
 }
+
 
 const view = (state) => `
         <div class="body-contents">
@@ -21,7 +22,7 @@ const view = (state) => `
                     <div class ="listCard">
                         <div class="listHeader">To Do</div>
                         <div class="taskContainer" id="container">
-                            ${available.map(task => `
+                            ${state.tasksAvailable.map(task => `
                             <div class="taskCard" draggable="true">
                             <div class="taskHeader">${task.name}</div>
                             </div>
@@ -39,7 +40,7 @@ const view = (state) => `
                     <div class ="listCard">
                         <div class="listHeader">In Progress</div>
                         <div class="taskContainer" id="container">
-                        ${inProgress.map(task => `
+                        ${state.tasksInProgress.map(task => `
                             <div class="taskCard" draggable="true">
                             <div class="taskHeader">${task.name}</div>
                             </div>
@@ -49,7 +50,7 @@ const view = (state) => `
                     <div class ="listCard">
                         <div class="listHeader">Done</div>
                         <div class="taskContainer" id="container">
-                        ${complete.map(task => `
+                        ${state.tasksComplete.map(task => `
                             <div class="taskCard" draggable="true">
                             <div class="taskHeader">${task.name}</div>
                             </div>
@@ -72,14 +73,15 @@ const update = {
             },
             body: JSON.stringify(task)
         }
-        state.tasks.push(task)
+        state.tasksAvailable.push(task)
         fetch(`/addTask/${state.projectBoard.id}`, postRequest).then(() => app.run('getTasks'))
         return state
     },
 
     getTasks: async (state) => {
         const result = await fetch(`/fetchTaskList/${state.projectBoard.id}`).then(res => res.json())
-
+        state.tasks = result[1]
+        state.projectBoard = result[0]
         return state
     }
 }
