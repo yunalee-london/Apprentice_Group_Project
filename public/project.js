@@ -37,9 +37,9 @@ const view = (state) => `
                             </div>
                         </div>
                     </div>
-                    <div class ="listCard">
+                    <div class ="listCard" ondragover="event.preventDefault()" ondrop="app.run('onDropInProgress', event)">
                         <div class="listHeader">In Progress</div>
-                        <div class="taskContainer" id="container" ondragover="event.preventDefault()" ondrop="app.run('onDropInProgress', event)">
+                        <div class="taskContainer" id="container" >
                         ${state.tasksInProgress.map(task => `
                             <div class="taskCard" draggable="true">
                             <div class="taskHeader">${task.name}</div>
@@ -91,7 +91,6 @@ const update = {
         const id = event.dataTransfer.getData('text')
         const index = state.tasksAvailable.findIndex(task => task.id == id)
         const task = state.tasksAvailable[index]
-        app.run('changeStatus',task)
         state.tasksInProgress.push(task)
         state.tasksAvailable.splice(index, 1)
         const postRequest = {
