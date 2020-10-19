@@ -273,6 +273,20 @@
     background-color: darkorange;
     outline: none;
 }
+.userContainer{
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+}
+.userLabel{
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    align-items: center;
+    margin: 5px;
+    background-color: lightgrey;
+    border-radius: 10px;
+}
 /* body {
     display: flex;
     justify-content: center;
