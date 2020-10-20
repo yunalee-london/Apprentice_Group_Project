@@ -76,17 +76,13 @@ app.get('/manageUsers/:id', async (req, res) => {
     res.render('userPage', {user})
 })
 
-app.post('/taskUpdateInProgress', async (req, res) => {
+app.post('/taskUpdate', async (req, res) => {
+    console.log(req.status)
     const task = await Task.findByPk(req.body.id)
-    await task.update({status: "inProgress"})
+    await task.update({status: req.body.status})
     res.send()
 })
 
-app.post('/taskUpdateComplete', async (req, res) => {
-    const task = await Task.findByPk(req.body.id)
-    await task.update({status: "complete"})
-    res.send()
-})
 
 app.get('/projectBoard/:id', async (req, res) => {
     const users = await User.findAll()
@@ -110,8 +106,12 @@ app.get('/projectBoard/:id', async (req, res) => {
     res.render('project', {projectBoard, tasks})
 })
 
-app.post('/assignUserTask/:id', async (req, res) => {
-    
+app.post('/assignUserTask', async (req, res) => {
+    console.log(req)
+    const user = await User.findByPk(req.body.id)
+    const task = await Task.findByPk(req.body.TaskId)
+    await task.update({UserId: user.id})
+    res.send()
 })
 
 app.get('/fetchTaskList', async (req, res) => {
