@@ -1,7 +1,4 @@
 
-state.tasksAvailable = state.tasks.filter(task => task.status == 'available')
-state.tasksInProgress = state.tasks.filter(task => task.status == 'inProgress')
-state.tasksComplete = state.tasks.filter(task => task.status == 'complete')
 
 class Task  {
     constructor(data) {
@@ -24,11 +21,13 @@ const view = (state) => `
                     <div class ="listCard">
                         <div class="listHeader">To Do</div>
                         <div class="taskContainer" id="container" >
-                            ${state.tasksAvailable.map(task => `
-                            <div id="${task.id}" class="taskCard" draggable="true" ondragstart="app.run('onDrag', event)">
+                            ${state.tasks.filter(task => task.status == 'available').map(task => `
+                            <div class="taskcard">
+                        <div  class="taskCard" id="${task.id} "draggable="true" ondragstart="app.run('onDrag', event)" ondragover="event.preventDefault()">
                                 <div class="taskHeader">${task.name}</div>
+                                </div>
                                 <div ondragover="event.preventDefault()" >
-                                    <div class="userLabel" id="${task.id}" draggable="false" ondrop="app.run('onDropUser', event, this)">
+                                    <div class="userLabel" id="${task.id}" ondrop="app.run('onDropUser', event, this)">
                                         <div class= "user-image" style="background-image: url(${state.users.filter(user => user.id == task.UserId).map(user => user.image)});">
                                         </div>
                                     </div>
@@ -48,9 +47,11 @@ const view = (state) => `
                     <div class ="listCard" ondragover="event.preventDefault()" id="inProgress" ondrop="app.run('onDropTask', event, this)">
                         <div class="listHeader">In Progress</div>
                         <div class="taskContainer" id="container" >
-                        ${state.tasksInProgress.map(task => `
-                        <div id="${task.id}" class="taskCard" draggable="true" ondragstart="app.run('onDrag', event)" ondragover="event.preventDefault()">
+                        ${state.tasks.filter(task => task.status == 'inProgress').map(task => `
+                        <div class="taskcard">
+                        <div  class="taskCard" id="${task.id} "draggable="true" ondragstart="app.run('onDrag', event)" ondragover="event.preventDefault()">
                                 <div class="taskHeader">${task.name}</div>
+                                </div>
                                 <div ondragover="event.preventDefault()" >
                                     <div class="userLabel" id="${task.id}" ondrop="app.run('onDropUser', event, this)">
                                         <div class= "user-image" style="background-image: url(${state.users.filter(user => user.id == task.UserId).map(user => user.image)});">
@@ -64,9 +65,11 @@ const view = (state) => `
                     <div class ="listCard" ondragover="event.preventDefault()" id="complete" ondrop="app.run('onDropTask', event, this)">
                         <div class="listHeader">Done</div>
                         <div class="taskContainer" id="container">
-                        ${state.tasksComplete.map(task => `
-                        <div id="${task.id}" class="taskCard" draggable="true" ondragstart="app.run('onDrag', event)" ondragover="event.preventDefault()">
+                        ${state.tasks.filter(task => task.status == 'complete').map(task => `
+                        <div class="taskcard">
+                        <div  class="taskCard" id="${task.id} "draggable="true" ondragstart="app.run('onDrag', event)" ondragover="event.preventDefault()">
                                 <div class="taskHeader">${task.name}</div>
+                                </div>
                                 <div ondragover="event.preventDefault()" >
                                     <div class="userLabel" id="${task.id}" ondrop="app.run('onDropUser', event, this)">
                                         <div class= "user-image" style="background-image: url(${state.users.filter(user => user.id == task.UserId).map(user => user.image)});">
@@ -93,7 +96,6 @@ const update = {
             },
             body: JSON.stringify(task)
         }
-        state.tasksAvailable.push(task)
         fetch(`/addTask/${state.projectBoard.id}`, postRequest).then(() => app.run('getTasks'))
         return state
     },
@@ -109,12 +111,13 @@ const update = {
         event.preventDefault()
         const id = event.dataTransfer.getData('text')
         const index = state.tasks.findIndex(task => task.id == id)
+        console.log(index)
+        state.tasks[index].status = statusName.id.toString()
         const task = state.tasks[index]
-        task.status = statusName.id
-        const taskList = eval(statusName.id)
-        console.log(taskList)
+       
+        
         // state.taskList = state.tasks.filter(task => task.status == statusName.id)
-        statusName = statusName.id
+        statusName = statusName.id.toString()
         const postRequest = {
             method: 'POST',
             headers: {
@@ -125,20 +128,18 @@ const update = {
         }
         fetch('/taskUpdate', postRequest).then(() => app.run('getTasks'))
         // app.run('taskComplete', task)
+        app.run('getTasks')
+        
         return state
     },
     onDropUser:(state, event, taskId) =>{
+
         const id = event.dataTransfer.getData('text')
         const index = state.users.findIndex(user => user.id == id)
         const user = state.users[index]
-        console.log(user)
         const taskIndex = state.tasks.findIndex(task => task.id == taskId.id)
         const task = state.tasks[taskIndex]
         task.UserId = user.id
-        state.tasksAvailable = state.tasks.filter(task => task.status == 'available')
-        state.tasksInProgress = state.tasks.filter(task => task.status == 'inProgress')
-        state.tasksComplete = state.tasks.filter(task => task.status == 'complete')
-        const userPK = user.id
         user.TaskId = task.id
         const postRequest = {
             method: 'POST',
@@ -156,9 +157,6 @@ const update = {
         const result = await fetch(`/fetchTaskList/${state.projectBoard.id}`).then(res => res.json())
         state.tasks = result[1]
         state.projectBoard = result[0]
-        state.tasksAvailable = state.tasks.filter(task => task.status == 'available')
-        state.tasksInProgress = state.tasks.filter(task => task.status == 'inProgress')
-        state.tasksComplete = state.tasks.filter(task => task.status == 'complete')
         return state
     }
 }

@@ -69,15 +69,11 @@ app.get('/manageUsers', async(req, res) => {
 })
 app.get('/manageUsers/:id', async (req, res) => {
     const user = await User.findByPk(req.params.id)
-    // const tasks = await user.getTasks({
-    //     include: [{model: Task, as: 'tasks'}],
-    //     nest: true
-    // })
-    res.render('userPage', {user})
+    const tasks = await Task.findAll({where: {UserId: user.id}})
+    res.render('userPage', {user, tasks})
 })
 
 app.post('/taskUpdate', async (req, res) => {
-    console.log(req.status)
     const task = await Task.findByPk(req.body.id)
     await task.update({status: req.body.status})
     res.send()
@@ -97,13 +93,6 @@ app.get('/fetchTaskList/:id', async (req, res) => {
     const tasks = await Task.findAll({where: {ProjectBoardId: projectBoard.id}})
     const array = [projectBoard, tasks]
     res.send(array)
-})
-
-app.get('/projectBoard/:id', async (req, res) => {
-    const projectBoard = await ProjectBoard.findByPk(req.params.id)
-    const tasks = await Task.findAll({where: {ProjectBoardId: projectBoard.id}})
-    // const tasks = await Task.findAll({where: {ListId: tasks.id}})
-    res.render('project', {projectBoard, tasks})
 })
 
 app.post('/assignUserTask', async (req, res) => {
