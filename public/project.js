@@ -107,14 +107,13 @@ const update = {
 
     onDropTask: (state, event, statusName) => {
         event.preventDefault()
-        console.log(statusName.id)
         const id = event.dataTransfer.getData('text')
         const index = state.tasks.findIndex(task => task.id == id)
         const task = state.tasks[index]
         task.status = statusName.id
-        state.tasksAvailable = state.tasks.filter(task => task.status == 'available')
-        state.tasksInProgress = state.tasks.filter(task => task.status == 'inProgress')
-        state.tasksComplete = state.tasks.filter(task => task.status == 'complete')
+        const taskList = eval(statusName.id)
+        console.log(taskList)
+        // state.taskList = state.tasks.filter(task => task.status == statusName.id)
         statusName = statusName.id
         const postRequest = {
             method: 'POST',
@@ -157,6 +156,9 @@ const update = {
         const result = await fetch(`/fetchTaskList/${state.projectBoard.id}`).then(res => res.json())
         state.tasks = result[1]
         state.projectBoard = result[0]
+        state.tasksAvailable = state.tasks.filter(task => task.status == 'available')
+        state.tasksInProgress = state.tasks.filter(task => task.status == 'inProgress')
+        state.tasksComplete = state.tasks.filter(task => task.status == 'complete')
         return state
     }
 }
