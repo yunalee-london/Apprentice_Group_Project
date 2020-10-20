@@ -8,22 +8,12 @@
     <section class ="userTaskList">
         <h3 class="taskListHeader"> Task List </h3>
         {{!-- {{#each task}} --}}
+
+        {{#each tasks}}
         <div class ="taskList">
-            task: {{user.task}}
+            <div>{{this.name}}</div>
         </div> 
-        <div class ="taskList">
-            task: {{user.task}}
-        </div>
-        <div class ="taskList">
-            task: {{user.task}}
-        </div>
-        <div class ="taskList">
-            task: {{user.task}}
-        </div>
-        <div class ="taskList">
-            task: {{user.task}}
-        </div>
-        {{!-- {{/each}} --}}
+        {{/each}}
     </section>
 </body>
 
