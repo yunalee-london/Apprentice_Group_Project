@@ -117,7 +117,7 @@ const update = {
        
         
         // state.taskList = state.tasks.filter(task => task.status == statusName.id)
-        statusName = statusName.id.toString()
+        statusName = statusName.id
         const postRequest = {
             method: 'POST',
             headers: {

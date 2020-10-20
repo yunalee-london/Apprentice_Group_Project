@@ -15,10 +15,11 @@ app.use(express.static('public'))
 app.engine('handlebars', handlebars)
 app.set('view engine', 'handlebars')
 
-app.get('/taskHistory'), async(req, res) => {
-    const tasks = await Task.findAll({where: {status: "completed"}})
+app.get('/taskHistory', async(req, res) => {
+    const tasks = await Task.findAll({where: {status: "complete"}})
+    console.log(tasks)
     res.render('taskHistory', {tasks})
-}
+})
 app.get('/projectboards', async(req, res) => {
     const projectboards = await ProjectBoard.findAll({
         include : [
@@ -75,7 +76,8 @@ app.get('/manageUsers/:id', async (req, res) => {
 
 app.post('/taskUpdate', async (req, res) => {
     const task = await Task.findByPk(req.body.id)
-    await task.update({status: req.body.status})
+    await task.update({status: req.body.status.toString()})
+    console.log(req.body.status.toString())
     res.send()
 })
 

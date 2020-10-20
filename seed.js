@@ -5,7 +5,11 @@ const data = [
         "tasks": [
             { "name": "Hoover the floor", "status": "available"},
             { "name": "clean the window", "status": "available"},
-            { "name": "take rubbish out", "status": "available"}           
+            { "name": "take rubbish out", "status": "available"},           
+            { "name": "take rubbish out", "status": "available"},           
+            { "name": "take rubbish out", "status": "available"},           
+            { "name": "take rubbish out", "status": "available"},           
+            { "name": "take out", "status": "complete"}           
         ]
     }
 ]

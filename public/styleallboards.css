@@ -1,12 +1,11 @@
 * {
     padding: 0;
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Comic Sans MS", cursive, sans-serif;
     color: inherit;
     overflow-x: hidden;
     text-decoration: none;
 }
-
 .body-contents {
     /* font-size: large;
     border: 2px;
@@ -19,12 +18,10 @@
     min-height: 100vh;
     background-color: rgb(190, 213, 255);
 }
-
 .listHeader{
     font-size: 20px;
     padding: 5px;
 }
-
 .projectBoard {
     background-color: whitesmoke;
     border-radius: 30px;
@@ -33,7 +30,6 @@
     margin: 40px;
     padding: 20px;
 }
-
 .contents {
     font-size: large;
     border: 2px;
@@ -45,11 +41,10 @@
     flex-direction: row;
     background-color: rgb(190, 213, 255);
   }
-
 .header {
     font-size: 30px;
     padding-left: 30px;
-
+    text-align: center;
 }
 .projectBoardCard {
     padding: 20px;
@@ -64,7 +59,6 @@
     width: 400px;
     height: 375px;
     transition: 0.5s;
-
 }
 .projectBoardCard:hover {
     padding: 30px;
@@ -73,7 +67,6 @@
     margin: 20px;
     opacity: 100%;
 }
-
 .listCard {
     padding: 20px;
     background-color: rgb(255, 255, 255) ;
@@ -88,13 +81,11 @@
     height: 600px;
     transition: 0.5s;
 }
-
 .projectContents {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 }
-
 .userCard {
     padding: 20px;
     background-color: whitesmoke;
@@ -109,7 +100,6 @@
     height: 100px;
     transition: 0.5s;
 }
-
 .userCard:hover {
     padding: 30px;
     background-color: lightgray;
@@ -117,7 +107,6 @@
     margin: 20px;
     opacity: 100%;
 }
-
 .user-image {
     display: flex;
     justify-self: end;
@@ -127,7 +116,6 @@
     border-radius: 100%;
     border: solid white 1px;
 }
-
 .topNav {
     /* background-color: rgb(0, 0, 0,0.6); */
     overflow: hidden;
@@ -139,24 +127,22 @@
     top: 0;
     z-index: 4; */
 }
-
 .wrapper {
     display: flex;
     flex-direction: column;
     justify-content: start;
 }
-
 .navButton {
     float: left;
     text-align: middle;
     justify-self: flex-start;
-    padding: 28px 32px;
+    padding: 10px 32px;
     margin: 4px;
     text-decoration: none;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 24px;
+    font-size: 18px;
+    border: 1px solid white;
+    border-radius: 30px;
 }
-
 .button{
     display:inline-block;
     padding:20px 80px;
@@ -171,13 +157,10 @@
     background-color: dodgerblue;
     outline:none;
     }
-
-
 .button:hover{
     color:#000000;
     background-color:#FFFFFF;
 }
-
 .profilePicture{
     background-size: cover;
     border: groove black;
@@ -185,15 +168,12 @@
     width: 30%;
     margin: 30px;
 }
-
 .userPage{
     height: 95vh;
     display: flex;
     flex-direction: row;
     background-color: rgb(190, 213, 255);
-
 }
-
 .userTitle{
     text-align: center;
     width: 27%;
@@ -218,7 +198,6 @@
     margin: 14px;
     width: 35%;
 }
-
 .taskcard {
     z-index: 6;
     background-color: rgb(230, 230, 230);
@@ -227,19 +206,16 @@
     margin: 20px;
     margin-bottom: 10px;
 }
-
 .taskcard:hover {
     padding: 15px;
     margin-top: 10px;
     margin-bottom: 0px;
 }
-
 .userTaskList{
     display: flex;
     flex-direction: column;
     width: 50%;
 }
-
 .taskListHeader{
     width: 100%;
 }
@@ -250,14 +226,15 @@
     align-items: center;
     text-align: center;
     min-height: 100vh;
-    background-color: rgb(230, 230, 230);
+    background-color: rgb(190, 213, 255);
 }
 .userPage_container{
     height: 60%;
     text-align: -webkit-center;
-    border-style: solid;
+    border: solid 2px black;
+    border-radius: 30px;
     padding: 70px;
-    background-color: cornflowerblue;
+    background-color: rgb(230, 230, 230);
 }
 .userPage_button{
     display: inline-block;
@@ -269,8 +246,8 @@
     color: #FFFFFF;
     text-align: center;
     transition: all 0.2s;
-    font-size: 50px;
-    background-color: darkorange;
+    font-size: 40px;
+    background-color: rgb(255, 174, 0);
     outline: none;
 }
 .userContainer{
@@ -287,87 +264,23 @@
     background-color: lightgrey;
     border-radius: 10px;
 }
-/* body {
-    display: flex;
-    justify-content: center;
-    background-color: rgba(239, 245, 243, 0.966);
-    color: black
-}
-h1 {
-    grid-area: header;
+@keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+    }
+.title {
+    font-size: 50px;
+    padding: 0px 30px 120px 30px;
     position: relative;
-    padding: 2rem 1rem;
-    color: rgb(8, 8, 8);
-    letter-spacing: 2px;
-    text-align: center;
-    margin: auto;
-    font-size: 40px;
+    animation-name: fadeIn;
+    animation-duration: 5s;
 }
-
-
-.boardadd {
-    height: 25rem;
-    width: 20rem;
-    border: solid 1px black;
-    background-color: rgba(240, 233, 233, 0.932);
-    margin: auto;
-    border-radius: 1rem;
-    border-bottom-right-radius: 2rem;
-    border-bottom-left-radius: 2rem;
-    position:relative; 
-    text-align: center;
+.history {
+    background-color: whitesmoke;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    margin: 40px;
+    padding: 20px;
+    line-height: 2.5em;
 }
-article.image {
-    height: 25rem;
-    width: 20rem;
-    border: solid 1px white;
-    margin: auto;
-    border-radius: 1rem;
-    border-bottom-right-radius: 2rem;
-    border-bottom-left-radius: 2rem;
-    position:relative; 
-    background-size: 100% 120%;
-}
-
-h2 {
-    height: 4rem;
-    width: 20rem;
-    line-height: 5rem;
-    margin: 0px;
-    position: absolute;
-    top: 0px;
-    text-align: center;
-    padding-top: 0px;
-    color: black;
-    background-color: white;
-    border-top-right-radius: 1rem;
-    border-top-left-radius: 1rem;
-    text-shadow : 1px 2px 3px gray;
-}
-
-
-
-@media screen and (min-width: 40em) {
-   section {
-    display: grid;   
-    grid-template-columns: auto auto;
-    grid-template-rows: none;
-    padding: 1rem;
-    gap: 1rem;
-   }
-   article {
-       margin: 0;
-   }
-}
-
-@media screen and (min-width: 60em) {
-    section {
-        grid-template-columns: auto auto auto;
-    }
-}
-@media screen and (min-width: 80em) {
-    section {
-        grid-template-columns: auto auto auto auto;
-    }
-}
- */
