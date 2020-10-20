@@ -15,6 +15,10 @@ app.use(express.static('public'))
 app.engine('handlebars', handlebars)
 app.set('view engine', 'handlebars')
 
+app.get('/taskHistory'), async(req, res) => {
+    const tasks = await Task.findAll({where: {status: "completed"}})
+    res.render('taskHistory', {tasks})
+}
 app.get('/projectboards', async(req, res) => {
     const projectboards = await ProjectBoard.findAll({
         include : [
