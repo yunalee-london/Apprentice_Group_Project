@@ -4,8 +4,8 @@ const data = [
         "name": "Spring Cleaning",
         "tasks": [
             { "name": "Hoover the floor", "status": "available"},
-            { "name": "clean the window", "status": "available"},
-            { "name": "take rubbish out", "status": "available"}           
+            { "name": "clean the window", "status": "completed"},
+            { "name": "take rubbish out", "status": "completed"}           
         ]
     }
 ]

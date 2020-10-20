@@ -1,0 +1,17 @@
+<body class="body-contents">
+    <div class="topNav">
+        <a class ="navButton" href="/projectboards">Manage Projects</a>
+        <a class ="navButton" href="/manageUsers">Manage Users</a>
+    </div>
+    <div class="wrapper">
+    <div class="header"> Task History </div>
+    <section class="history">
+            {{#each tasks}}
+                <ul>
+                    <li> &#10004 {{this.name}} {{this.ProjectBoardId}} {{this.UserId}} (completed on: {{this.updatedAt}})</li>
+                </ul>
+            {{/each}}
+        </div>
+    </section>
+    </div>
+</body>x
