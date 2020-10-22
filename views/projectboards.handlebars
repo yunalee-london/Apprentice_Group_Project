@@ -1,8 +1,9 @@
-
 <div class="body-contents">
     <div class="topNav">
         <a class ="navButton" href="/manageUsers">Manage Users</a>
         <a class ="navButton" href="/taskHistory">Task History</a>
+        <button class="delButton" onclick="delFunction(event)">Delete</button>
+        <button class="delButton" onclick="editFunction(event)">Edit</button>
     </div>
     <div class="wrapper">
     <div class="header"> Project Boards</div>
@@ -10,8 +11,13 @@
         {{#each projectboards}}
         <a href="/projectBoard/{{this.id}}">
         <div class="projectBoardCard">
-                <h2> {{this.name}} </h2>      
-            </article>
+            <h2 class="headerwithbutton"> {{this.name}}</h2>   
+                <a id="bin" href='/projectboards/{{this.id}}/delete'>❌</a> 
+                <form action="/projectboards/{{this.id}}" method="POST" id="editName">
+                    <label class="name"> Change Project Name: </label>
+                    <input name="name" value="" />
+                     <button>Update</button>
+                </form>    
             <div>
                 {{#each tasks}}
                 <div>
@@ -19,9 +25,10 @@
                 </div>
                 {{/each}}
             </div>
-            </div>
-            </a>
+        </div>
+        </a>
         {{/each}}
+    </div>
 
     <section class="projectBoardCard">
         <h3> New Project Board</h3>
@@ -34,5 +41,34 @@
 </div>
 </div>
 
-
-
+<script>
+    function delFunction(event) {
+        var elms = document.querySelectorAll("#bin");
+        for(var i = 0; i < elms.length; i++) 
+            if (elms[i].style.display==='none') {
+                elms[i].style.display='block'
+            } else {
+                elms[i].style.display='none'
+            }
+    }
+    function editFunction(event) {
+        var elms = document.querySelectorAll("#editName");
+        for(var i = 0; i < elms.length; i++) 
+            if (elms[i].style.display==='none') {
+                elms[i].style.display='block'
+            } else {
+                elms[i].style.display='none'
+            }
+    }
+    
+</script>
+    {{!-- <a id="edit" onclick="editName({{this.id}})">✏️</a>
+      {{!-- function editName(id) {
+         var elms = document.querySelectorAll("#editName");
+        for(var i = 0; i < elms.length; i++) 
+            if (elms[i].style.display==='none') {
+                elms[i].style.display='block'
+            } else {
+                elms[i].style.display='none'
+            }
+    } --}} --}}

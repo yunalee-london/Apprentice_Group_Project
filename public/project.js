@@ -12,6 +12,8 @@ const view = (state) => `
         <div class="body-contents">
         <div class="topNav">
             <a class ="navButton" href="/projectboards">Manage Projects</a>
+            <a class ="navButton" href="/manageUsers">Manage Users</a>
+            <a class ="navButton" href="/taskHistory">Task History</a>
         </div>
         <div class="projectBoard">
             <div class="header">${state.projectBoard.name}</div>
