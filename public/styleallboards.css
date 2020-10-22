@@ -328,4 +328,16 @@
 .user-name{
     display:inline-block;
 }
-
+.binButton {
+    float: left;
+    text-align: middle;
+    justify-self: flex-start;
+    padding: 10px 32px;
+    margin: 4px;
+    text-decoration: none;
+    font-size: 18px;
+    border: 1px solid white;
+    border-radius: 30px;
+    background-image: url('/image/recyclingbin.jpg');
+    background-size: cover
+}

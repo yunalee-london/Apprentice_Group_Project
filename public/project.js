@@ -9,11 +9,12 @@ class Task  {
 
 
 const view = (state) => `
-        <div class="body-contents">
-        <div class="topNav">
+        <div class="body-contents" >
+        <div class="topNav" id="dropToDelete" ondragover="event.preventDefault()" ondrop="app.run('onDropDelete', event)">
             <a class ="navButton" href="/projectboards">Manage Projects</a>
             <a class ="navButton" href="/manageUsers">Manage Users</a>
             <a class ="navButton" href="/taskHistory">Task History</a>
+            
         </div>
         <div class="projectBoard">
             <div class="header">${state.projectBoard.name}</div>
@@ -160,7 +161,25 @@ const update = {
         state.tasks = result[1]
         state.projectBoard = result[0]
         return state
+    },
+    onDropDelete: (state, event) => {
+        const id = event.dataTransfer.getData('text')
+        const index = state.tasks.findIndex(task => task.id == id)
+        state.tasks.splice(index, 1)
+       
+        const postRequest = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({id}),
+                
+        }
+        fetch('/taskDelete', postRequest)
+        console.log(state)
+        return state
     }
+    
 }
 app.start('project',state,view,update)
 app.run('getTasks')
