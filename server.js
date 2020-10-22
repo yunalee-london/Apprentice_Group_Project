@@ -175,6 +175,14 @@ app.post('/addTask/:id', async (req, res) => {
     res.send()
 })
 
+app.post('/taskDelete', (req, res) => {
+    console.log(req.body.id)
+    Task.findByPk(req.body.id)
+        .then(task => {
+            task.destroy()
+            res.send()
+        })
+})
 app.listen(process.env.PORT, () => {
     sequelize.sync(() => {
         console.log('Kanban app running on port', process.env.PORT)
