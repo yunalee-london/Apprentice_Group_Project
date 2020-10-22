@@ -2,6 +2,9 @@
     <div class="topNav">
         <a class ="navButton" href="/projectboards">Manage Projects</a>
         <a class ="navButton" href="/taskHistory">Task History</a>
+        <button class="delButton" onclick="delFunction(event)">Delete</button>
+        <button class="delButton" onclick="editFunction(event)">Edit</button>
+        
     </div>
     <div class="wrapper">
     <div class="header">Users</div>
@@ -11,7 +14,10 @@
         <a href="/manageUsers/{{this.id}}">
         <section class="userCard">
         <div class="userCardDetails">
-            <div class="user-name">{{this.name}}</div>
+            <div class="user-name">{{this.name}}
+                <a id="bin" href='/manageUsers/{{this.id}}/delete'>❌</a> 
+                <a id='edit' href='/manageUsers/{{this.id}}/edit'>✏️</a>
+            </div>
             <div class="user-image" style="background-image: url({{this.image}});"></div>
         </div>
         </section>
@@ -42,4 +48,23 @@
   </div>
  </div>
 </div>
-
+<script>
+    function delFunction(event) {
+        var elms = document.querySelectorAll("#bin");
+        for(var i = 0; i < elms.length; i++) 
+            if (elms[i].style.display==='none') {
+                elms[i].style.display='block'
+            } else {
+                elms[i].style.display='none'
+            }
+    }
+    function editFunction(event) {
+        var elms = document.querySelectorAll("#edit");
+        for(var i = 0; i < elms.length; i++) 
+            if (elms[i].style.display==='none') {
+                elms[i].style.display='block'
+            } else {
+                elms[i].style.display='none'
+            }
+    }
+</script>

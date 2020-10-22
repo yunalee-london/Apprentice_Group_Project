@@ -227,6 +227,10 @@
     text-align: center;
     min-height: 100vh;
     background-color: rgb(190, 213, 255);
+    background-image: url('/image/kanban.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 }
 .userPage_container{
     height: 60%;
@@ -234,7 +238,7 @@
     border: solid 2px black;
     border-radius: 30px;
     padding: 70px;
-    background-color: rgb(230, 230, 230);
+    background-color: rgb(190, 213, 255);
 }
 .userPage_button{
     display: inline-block;
@@ -264,16 +268,12 @@
     background-color: lightgrey;
     border-radius: 10px;
 }
-@keyframes fadeIn {
-    0% {opacity:0;}
-    100% {opacity:1;}
-    }
 .title {
     font-size: 50px;
-    padding: 0px 30px 120px 30px;
+    padding: 30px;
     position: relative;
-    animation-name: fadeIn;
-    animation-duration: 5s;
+    color: black;
+    font-weight: bold;
 }
 .history {
     background-color: whitesmoke;
@@ -284,3 +284,48 @@
     padding: 20px;
     line-height: 2.5em;
 }
+
+.delButton {
+    float: left;
+    text-align: middle;
+    justify-self: flex-start;
+    padding: 10px 32px;
+    margin: 4px;
+    text-decoration: none;
+    font-size: 18px;
+    border: 1px solid white;
+    border-radius: 30px;
+    background-color: whitesmoke;
+
+}
+
+#bin {
+    display: none;
+    font-size: 15px;
+    float:right;
+    padding: 0px 30px 0px 0px;
+    
+}
+
+#edit {
+    display: none;
+    font-size: 15px;
+    float: right;
+    padding: 0px 30px 0px 0px;
+}
+
+#editName{
+    display: none;
+}
+
+
+.name{
+    font-weight: thin;
+    color: rgba(165, 3, 3, 0.473);
+    font-size: 60%;
+}
+
+.user-name{
+    display:inline-block;
+}
+

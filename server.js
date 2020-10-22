@@ -43,11 +43,25 @@ app.post('/projectboards', async(req, res) => {
     
     res.redirect('/projectboards')
 })
-// app.post('/projectboards/:id', async(req, res) => {
-//     const projectboard = await ProjectBoard.findByPk(req.params.id)
-//     await projectboard.create(req.body)
-//     res.redirect(`/projectboards/${projectboard.id}`)
-// })
+//delete projectboard
+app.get('/projectboards/:id/delete', (req, res) => {
+    ProjectBoard.findByPk(req.params.id)
+        .then(projectboard => {
+            projectboard.destroy()
+            res.redirect('/projectboards')
+        })
+})
+// edit projectboard
+app.get('/projectboards/:id', async(req, res) => {
+    const projectboard = await ProjectBoard.findByPk(req.params.id)
+    res.render('projectboards', {projectboard})
+})
+
+app.post('/projectboards/:id', async(req, res) => {
+    const projectboard = await ProjectBoard.findByPk(req.params.id)
+    await projectboard.update(req.body)
+    res.redirect(`/projectboards/`)
+})
 //addUser
 app.get('/', (req, res) => {
     res.render('addUser')
@@ -67,6 +81,26 @@ app.post('/addManageUser', async(req, res) => {
 app.get('/manageUsers', async(req, res) => {
     const users = await User.findAll()
     res.render('manageUsers', {users})
+})
+
+//delete User
+app.get('/manageUsers/:id/delete', (req, res) => {
+    User.findByPk(req.params.id)
+        .then(user => {
+            user.destroy()
+            res.redirect('/manageUsers')
+        })
+})
+//edit Users
+app.get('/manageUsers/:id/edit', async(req, res) => {
+    const user = await User.findByPk(req.params.id)
+    res.render('editUser', {user})
+})
+
+app.post('/manageUsers/:id/edit', async(req, res) => {
+    const user = await User.findByPk(req.params.id)
+    await user.update(req.body)
+    res.redirect(`/manageUsers/${user.id}`)
 })
 app.get('/manageUsers/:id', async (req, res) => {
     const user = await User.findByPk(req.params.id)

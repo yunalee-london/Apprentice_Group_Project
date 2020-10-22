@@ -1,6 +1,6 @@
 const { Sequelize, Model, DataTypes } = require('sequelize')
 const path = require('path')
-// const sequelize = new Sequelize({dialect: 'sqlite', storage: path.join(__dirname, 'data.db')})
+//const sequelize = new Sequelize({dialect: 'sqlite', storage: path.join(__dirname, 'data.db')})
 
 const connectionSettings = {
     test: {dialect: 'sqlite', storage: 'sqlite::memory:'},
