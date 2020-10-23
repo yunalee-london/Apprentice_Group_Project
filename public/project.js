@@ -177,7 +177,8 @@ const update = {
                 
         }
         fetch('/taskDelete', postRequest)
-        console.log(state)
+        //console.log(state)
+        
         return state
     }
     
