@@ -14,6 +14,7 @@ const view = (state) => `
             <a class ="navButton" href="/projectboards">Manage Projects</a>
             <a class ="navButton" href="/manageUsers">Manage Users</a>
             <a class ="navButton" href="/taskHistory">Task History</a>
+            <a class ="navButton"> Drag&Delete 🗑 </a>
             
         </div>
         <div class="projectBoard">
@@ -166,7 +167,7 @@ const update = {
         const id = event.dataTransfer.getData('text')
         const index = state.tasks.findIndex(task => task.id == id)
         state.tasks.splice(index, 1)
-       
+               
         const postRequest = {
             method: 'POST',
             headers: {
@@ -176,10 +177,13 @@ const update = {
                 
         }
         fetch('/taskDelete', postRequest)
-        console.log(state)
+        //console.log(state)
+        
         return state
     }
     
 }
 app.start('project',state,view,update)
 app.run('getTasks')
+
+  
