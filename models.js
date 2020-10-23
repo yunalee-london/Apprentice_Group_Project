@@ -14,7 +14,7 @@ const sequelize = process.env.NODE_ENV === 'production'
 class User extends Model {}
 class ProjectBoard extends Model {}
 class Task extends Model {}
-
+class Comment extends Model {}
 
 
 User.init({
@@ -31,11 +31,16 @@ Task.init({
     status: DataTypes.STRING
 }, {sequelize})
 
+Comment.init({
+    comment:DataTypes.STRING,
+}, {sequelize})
 
 ProjectBoard.hasMany(Task, {as:"tasks"})
 Task.belongsTo(ProjectBoard)
 Task.belongsTo(User)
 User.hasMany(Task, {as:'tasks'})
+Task.hasMany(Comment, {as:'comment'})
+Comment.belongsTo(Task)
 // User.belongsTo(Task)
 // Task.hasMany(User, {as:'users'})
 
@@ -46,5 +51,6 @@ module.exports = {
     ProjectBoard,
     sequelize,
     Task,
-    User
+    User,
+    Comment
 }

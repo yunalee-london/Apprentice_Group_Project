@@ -21,7 +21,11 @@
             <div>
                 {{#each tasks}}
                 <div>
-                    <div>{{this.name}}</div>
+                    <div onclick='commFunction(event)'>➕ {{this.name}}</div>
+                    <form action="/projectboards"/{{this.id}}/ method="POST" id="commentOpen" >
+                    <label class="name"> Comment: </label>
+                    <textarea name="comment"></textarea>
+                    <button onclick="commFunction(event)">Add</button></form>
                 </div>
                 {{/each}}
             </div>
@@ -31,9 +35,9 @@
     </div>
 
     <section class="projectBoardCard">
-        <h3> New Project Board</h3>
+        <h3 class="newboard"> New Project Board</h3>
         <form action='/projectboards' method="POST">
-        <label> Name : </label>
+        <label class="boardform"> Name : </label>
         <input name="name" type="text" placeholder="Project Board Title" required> <br>
         </form>
     </section>
@@ -60,6 +64,16 @@
                 elms[i].style.display='none'
             }
     }
+    function commFunction(event) {
+        var elms = document.querySelectorAll("#commentOpen");
+        for(var i = 0; i < elms.length; i++) 
+            if (elms[i].style.display==='none') {
+                elms[i].style.display='block'
+            } else {
+                elms[i].style.display='none'
+            }
+    }
+  
     
 </script>
     {{!-- <a id="edit" onclick="editName({{this.id}})">✏️</a>

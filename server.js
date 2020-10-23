@@ -3,7 +3,7 @@ const Handlebars = require('handlebars')
 const expressHandlebars = require('express-handlebars')
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 const app = express()
-const {ProjectBoard, User, Task, sequelize} = require('./models')
+const {ProjectBoard, User, Task, Comment, sequelize} = require('./models')
 
 
 const handlebars = expressHandlebars({
@@ -36,7 +36,12 @@ app.get('/projectboards/:id', async(req, res) => {
     })
     res.render('tasks', {projectboard, tasks})
 })
-
+//comment
+app.post('/projectboards', async(req, res) => {
+    const comment = await Comment.create(req.body)
+    console.log(user);
+    res.redirect('/projectboards')
+})
 //add
 app.post('/projectboards', async(req, res) => {
     await ProjectBoard.create(req.body)
